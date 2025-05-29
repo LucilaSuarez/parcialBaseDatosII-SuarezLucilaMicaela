@@ -1,0 +1,53 @@
+db.librosEspeciales.drop() 
+db.librosEspeciales.insertMany([{_id: 1, titulo: 'Orgullo y prejucio', genero: 'romance', autores:['jane austen'],
+    paginas: 300, nivel: 'juvenil', precio:[{fisico: 3500, digital: 2500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2020}},
+
+    {_id: 2, titulo: 'Cumbres borrascosas', genero: 'romance', autores:['emili bronte'],
+    paginas: 340, nivel: 'juvenil', precio:[{fisico: 5500, digital: 4500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2021}},
+
+    {_id: 3, titulo: 'La bella y la bestia', genero: 'romance', autores:['carlos gomez'],
+    paginas: 190, nivel: 'infantil', precio:[{fisico: 2500, digital: 1500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2010}},
+
+    {_id: 4, titulo: 'Alicia en l pais de las maravillas', genero: 'aventuras', autores:['jane austen'],
+    paginas: 240, nivel: 'infantil', precio:[{fisico: 6500, digital: 4500}], disponible: false, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2022}},
+
+    {_id: 5, titulo: 'Persuacion', genero: 'romance', autores:['jane austen'],
+    paginas: 320, nivel: 'juvenil', precio:[{fisico: 3500, digital: 2500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2020}},
+
+    {_id: 6, titulo: 'A travez de mi ventana', genero: 'romance', autores:['lucia herrera'],
+    paginas: 400, nivel: 'juvenil', precio:[{fisico: 2500, digital: 1500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'españa', anioFundacion: 2024}},
+
+    {_id: 7, titulo: 'Sombra y hueso', genero: 'ciencia ficcion', autores:['carlos gomez'],
+    paginas: 500, nivel: 'adulto', precio:[{fisico: 7500, digital: 6500}], disponible: false, 
+    editorial: {nombre: 'rba', pais: 'españa', anioFundacion: 2007}},
+    
+    {_id: 8, titulo: 'Anabelle', genero: 'terror', autores:['lucia herrera'],
+    paginas: 350, nivel: 'juvenil', precio:[{fisico: 7500, digital: 6500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'españa', anioFundacion: 2024}}, 
+
+    {_id: 9, titulo: 'Peter pan', genero: 'aventura', autores:['lucia herrera'],
+    paginas: 400, nivel: 'juvenil', precio:[{fisico: 2500, digital: 1500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'españa', anioFundacion: 2023}}, 
+
+    {_id: 10, titulo: 'Mujercitas', genero: 'romance', autores:['lucia herrera'],
+    paginas: 310, nivel: 'juvenil', precio:[{fisico: 4500, digital: 3500}], disponible: true, 
+    editorial: {nombre: 'rba', pais: 'argentina', anioFundacion: 2022}}])
+
+//1. Crear el script .js con la creación de la base de datos y las colecciones
+//2. Buscar cuántos libros tienen a "Carlos Gómez" entre sus autores
+db.librosEspeciales.find({autores: 'carlos gomez'}).count()
+
+//3. Buscar cuántos libros son de género "romance" y tienen "Lucía Herrera" entre los autores.
+db.librosEspeciales.find({$and: [{genero: 'romance', autores: 'lucia herrera'}]}).count()
+
+//4. Listar el título y número de páginas de los libros con nivel de lectura "juvenil".
+db.librosEspeciales.find({nivel: 'juvenil'}, {_id:0, titulo: 1, paginas: 1})
+
+//5. Obtener título, número de páginas y nivel de lectura de los libros que tengan entre 200 y 400 páginas (inclusive).
+db.librosEspeciales.find({paginas: {$gte: 200, $lte: 400}},{_id:0, titulo:1, paginas:1, nivel:1})
